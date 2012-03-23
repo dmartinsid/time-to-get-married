@@ -71,7 +71,31 @@ public class AgeCalculatorTest {
 		assertEquals(Years.years(24), ageCalculator.byEducation(educations, birthdate));
 
 	}
+	
+	@Test
+	public void shouldEstimateAgeByHighSchoolWhenBirthdayIsNull() 
+	{
+		when(iterador.hasNext()).thenReturn(true, false);
+		when(educations.iterator()).thenReturn(iterador);
+		when(educations.iterator().next()).thenReturn(highSchoolducation);
+	
+		String birthdate = null;
+		assertEquals(Years.years(25), ageCalculator.byEducation(educations, birthdate));
 
+	}
+
+	@Test
+	public void shouldEstimateAgeByCollegeWhenBirthdayIsNull() 
+	{
+
+		when(iterador.hasNext()).thenReturn(true, false);
+		when(educations.iterator()).thenReturn(iterador);
+		when(educations.iterator().next()).thenReturn(collegeEducation);
+
+		String birthdate = null;
+		assertEquals(Years.years(22), ageCalculator.byEducation(educations, birthdate));
+	}
+	
 	@Test
 	public void shouldEstimateAgeByCollege() 
 	{

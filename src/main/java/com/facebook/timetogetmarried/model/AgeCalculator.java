@@ -12,6 +12,9 @@ public class AgeCalculator {
 	
 	private boolean estimatedByHighSchool;
 	private Years age;
+	
+	private final Integer highSchoolFinishAge = 17;
+	private final Integer collegeFinishAge = 22;
 
 	public AgeCalculator()
 	{
@@ -19,21 +22,15 @@ public class AgeCalculator {
 	}
 	public Years byEducation(List<Education> educations, String birthday)
 	{
-		for (Education education : educations) {
-
-			if (education.getType() != null && !estimatedByHighSchool) 
+		for (Education education : educations) 
+		{
+			if(estimatedByHighSchool) 
+				break;
+			
+			if (isValidEducation(education)) 
 			{
-
-				if (education.getType().equals("High School")) 
-				{
-					estimateAge(birthday, education, 17);
-
-				} 
-				else if (education.getType().equals("College")) 
-				{
-					estimateAge(birthday, education, 22);
-
-				}
+				estimateAge(birthday, education);
+				
 			}
 
 		}
@@ -41,23 +38,63 @@ public class AgeCalculator {
 		return age;
 	}
 	
-	private void estimateAge(String birthday, Education education, int finishAge) 
+	private Integer finishAge(Education education)
 	{
-		if (education.getYear() != null && education.getYear().getName() != null && birthday != null) 
-		{
-			Integer monthOfYear = Integer.valueOf(birthday.substring(0, 2));
-			Integer dayOfMonth = Integer.valueOf(birthday.substring(3, 5));
-
-			DateTime now = new DateTime();
-			
-			Integer year = (Integer.valueOf(education.getYear().getName())- finishAge);
-			DateMidnight birthdate = new DateMidnight(year,	monthOfYear, dayOfMonth);
-			
-			age = Years.yearsBetween(birthdate, now);
-			
-			if(education.getType().equals("High School"))
-				estimatedByHighSchool = true;
+		if (education.getType().equals("High School")) 
+		{	
+			estimatedByHighSchool = true;
+			return highSchoolFinishAge;
 		}
+		else
+			return collegeFinishAge;
+	}
+	
+	private void estimateAge(String birthday, Education education) 
+	{
+		DateTime now = new DateTime();
+		DateMidnight birthdate = birthdate(birthday, education);
+		age = Years.yearsBetween(birthdate, now);
+				
+	
+		
+	}
+	
+	private DateMidnight birthdate(String birthday, Education education)
+	{
+		Integer monthOfYear;
+		Integer dayOfMonth;
+		if(birthday != null)
+		{
+			monthOfYear = Integer.valueOf(birthday.substring(0, 2));
+			dayOfMonth = Integer.valueOf(birthday.substring(3, 5));
+			
+		}
+		else
+		{
+			DateTime now = new DateTime();
+			monthOfYear = now.getMonthOfYear();
+			dayOfMonth = now.getDayOfMonth();
+		}
+		Integer year = birthYear(education);
+		
+		return new DateMidnight(year, monthOfYear, dayOfMonth);
+	}
+	
+	private boolean isValidEducation(Education education)
+	{
+		if (education.getType() != null)
+			if(education.getYear() != null)
+				if(education.getYear().getName() != null)
+					return true;
+		
+		return false;
+		
+	}
+	
+	private Integer birthYear(Education education)
+	{
+		return Integer.valueOf(education.getYear().getName()) - finishAge(education);
+		
 	}
 
 }
