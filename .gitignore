@@ -1,0 +1,7 @@
+*.class
+.gradle
+*.jar
+*.war
+build
+bin
+token.token
