@@ -5,3 +5,6 @@
 build
 bin
 token.token
+.classpath
+.project
+.settings
