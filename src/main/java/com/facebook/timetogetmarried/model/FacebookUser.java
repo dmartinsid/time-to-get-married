@@ -7,6 +7,7 @@ import org.joda.time.DateTime;
 import org.joda.time.Years;
 
 import com.restfb.Facebook;
+import com.restfb.FacebookClient;
 import com.restfb.types.modified.User;
 import com.restfb.types.modified.User.Education;
 
@@ -20,6 +21,11 @@ public class FacebookUser {
 
 	public FacebookUser(User user) {
 		this.user = user;
+	}
+	
+	public FacebookUser(FacebookClient facebookClient)
+	{
+		this.user = facebookClient.fetchObject("me", User.class);
 	}
 	
 	

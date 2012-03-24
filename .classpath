@@ -50,5 +50,5 @@
 	<classpathentry exported="true" kind="lib" path="/home/deivid/.gradle/caches/artifacts-8/filestore/commons-lang/commons-lang/2.4/jar/16313e02a793435009f1e458fa4af5d879f6fb11/commons-lang-2.4.jar" sourcepath="/home/deivid/.gradle/caches/artifacts-8/filestore/commons-lang/commons-lang/2.4/source/2b8c4b3035e45520ef42033e823c7d33e4b4402c/commons-lang-2.4-sources.jar"/>
 	<classpathentry exported="true" kind="lib" path="/home/deivid/.gradle/caches/artifacts-8/filestore/org.hamcrest/hamcrest-core/1.1/jar/860340562250678d1a344907ac75754e259cdb14/hamcrest-core-1.1.jar" sourcepath="/home/deivid/.gradle/caches/artifacts-8/filestore/org.hamcrest/hamcrest-core/1.1/source/2ccf1154d1a8936042a8a742dc3e611d02ac7213/hamcrest-core-1.1-sources.jar"/>
 	<classpathentry exported="true" kind="lib" path="/home/deivid/.gradle/caches/artifacts-8/filestore/javax.servlet/servlet-api/2.5/jar/5959582d97d8b61f4d154ca9e495aafd16726e34/servlet-api-2.5.jar" sourcepath="/home/deivid/.gradle/caches/artifacts-8/filestore/javax.servlet/servlet-api/2.5/source/21599814ad9a605b86f3e6381571beccd861a32/servlet-api-2.5-sources.jar"/>
-	<classpathentry kind="output" path="bin"/>
+	<classpathentry kind="output" path="src/main/webapp/WEB-INF/classes"/>
 </classpath>
