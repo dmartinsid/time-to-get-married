@@ -9,3 +9,4 @@ classes
 *.jar
 *.war
 token.token
+facebook.properties
