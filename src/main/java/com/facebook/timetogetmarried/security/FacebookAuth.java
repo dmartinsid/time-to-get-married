@@ -20,16 +20,18 @@ import com.facebook.timetogetmarried.model.FacebookProperties;
 public class FacebookAuth {
 	
 	private String code;
+	private FacebookProperties facebookProperties;
 
-	public FacebookAuth(String code) throws IOException 
+	public FacebookAuth(String code, FacebookProperties facebookProperties) throws IOException 
 	{
 		this.code = code;
+		this.facebookProperties = facebookProperties;
 		
 	}
 
-	private List<NameValuePair> getParameters(String code) throws IOException {
-		FacebookProperties facebookProperties = new FacebookProperties();
-		
+	private List<NameValuePair> getParameters() 
+	{
+	
 		List<NameValuePair> parameters = new ArrayList<NameValuePair>();
 		parameters.add(new BasicNameValuePair("client_id", facebookProperties.getClient_id()));
 		parameters.add(new BasicNameValuePair("client_secret",facebookProperties.getClient_secret()));
@@ -44,7 +46,7 @@ public class FacebookAuth {
 		HttpClient client = new DefaultHttpClient();
 		HttpPost post = new HttpPost("https://graph.facebook.com/oauth/access_token");
 
-		UrlEncodedFormEntity formEntity = new UrlEncodedFormEntity(getParameters(code));
+		UrlEncodedFormEntity formEntity = new UrlEncodedFormEntity(getParameters());
 		post.setEntity(formEntity);
 
 		HttpResponse response = client.execute(post);
@@ -65,7 +67,6 @@ public class FacebookAuth {
 		while ((lineData = reader.readLine()) != null) {
 			message += lineData;
 		}
-		System.out.println(message);
 		return getQueryVariable(message, "access_token");
 
 	}

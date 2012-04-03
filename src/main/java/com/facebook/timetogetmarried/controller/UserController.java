@@ -2,8 +2,6 @@ package com.facebook.timetogetmarried.controller;
 
 import java.io.IOException;
 
-import org.apache.http.client.ClientProtocolException;
-
 import br.com.caelum.vraptor.Path;
 import br.com.caelum.vraptor.Resource;
 import br.com.caelum.vraptor.Result;
@@ -27,6 +25,12 @@ public class UserController {
 		this.accessToken = accessToken;
 		this.facebookProperties = facebookProperties;
 	}
+	
+	@Path("/")
+	public void index() {
+		result.include(facebookProperties);
+		
+	}
 
 
 	@Path("/logged")
@@ -39,19 +43,14 @@ public class UserController {
 
 	@Path("/oauth2")
 	public void oauth2(String state, String code)
-			throws ClientProtocolException, IOException
-
+			throws IOException
 	{
-		FacebookAuth facebookAuth = new FacebookAuth(code);	
+		FacebookAuth facebookAuth = new FacebookAuth(code, facebookProperties);	
 		accessToken.setToken(facebookAuth.requestAccessToken());
 		
 		result.redirectTo("/logged");
 	}
 
-	@Path("/")
-	public void index() {
-		result.include(facebookProperties);
-		
-	}
+	
 
 }
