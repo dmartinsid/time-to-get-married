@@ -7,7 +7,6 @@
 <title></title>
 </head>
 <body>
-Login
 
 Name: ${facebookUser.name}
 Age: ${facebookUser.age}
